@@ -67,7 +67,7 @@ jobs:
     
     steps:
       - name: Echo log
-        run: echo "Second job running
+        run: echo "Second job running"
 
       - name: Upload coverage to Coveralls
         env:
