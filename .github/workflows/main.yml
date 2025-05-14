@@ -34,3 +34,10 @@ jobs:
         run: |
           echo Add other actions to build,
           echo test, and deploy your project.
+
+      - name: Set environment variable
+        run: echo 'MY_VARIABLE=This is a variable' >> $GITHUB_ENV
+
+
+      - name: Display variable
+        run: echo "Valeur de MY_VARIABLE:${{ env.MY_VARIABLE }}"
