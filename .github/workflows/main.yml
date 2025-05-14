@@ -46,3 +46,9 @@ jobs:
         run: echo "Valeur de MY_SECRET:***"
         env:
           MY_SECRET: ${{ secrets.MY_SECRET }}
+
+      - name: Create hello.txt
+        run: echo "Hello world" > hello.txt
+
+      - name: Display hello.txt content
+        run: cat hello.txt
