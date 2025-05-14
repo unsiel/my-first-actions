@@ -67,4 +67,9 @@ jobs:
     
     steps:
       - name: Echo log
-        run: echo "Second job running"
+        run: echo "Second job running
+
+      - name: Upload coverage to Coveralls
+        env:
+          COVERALLS_TOKEN: ${{ secrets.COVERALLS_TOKEN }}
+        run: npm run coveralls
