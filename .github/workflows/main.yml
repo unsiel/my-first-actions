@@ -60,16 +60,13 @@ jobs:
         run: npm test
 
   second-job:
-    name: Log message after tests
-    runs-on: ubuntu-latest
-
-    needs: build
+      name: Log message after tests
+      runs-on: ubuntu-latest
+      needs: build
     
-    steps:
-      - name: Echo log
-        run: echo "Second job running"
+      steps:
+        - uses: actions/checkout@v4
+    
+        - name: Echo log
+          run: echo "Second job running"
 
-      - name: Upload coverage to Coveralls
-        env:
-          COVERALLS_TOKEN: ${{ secrets.COVERALLS_TOKEN }}
-        run: npm run coveralls
