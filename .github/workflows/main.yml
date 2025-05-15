@@ -17,26 +17,26 @@ on:
 jobs:
   # This workflow contains a single job called "build"
   build:
-  runs-on: ubuntu-latest
-
-  steps:
-    - uses: actions/checkout@v4
-
-    - name: Setup Node.js
-      uses: actions/setup-node@v4
-      with:
-        node-version: '20'
-
-    - name: Install dependencies
-      run: npm install
-
-    - name: Run tests with coverage
-      run: npm run test:coverage
-
-    - name: Send coverage to Coveralls
-      run: npm run coveralls
-      env:
-        COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
+    runs-on: ubuntu-latest
+  
+    steps:
+      - uses: actions/checkout@v4
+  
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+  
+      - name: Install dependencies
+        run: npm install
+  
+      - name: Run tests with coverage
+        run: npm run test:coverage
+  
+      - name: Send coverage to Coveralls
+        run: npm run coveralls
+        env:
+          COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_TOKEN }}
 
   second-job:
       name: Log message after tests
