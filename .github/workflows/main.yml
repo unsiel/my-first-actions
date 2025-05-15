@@ -17,47 +17,26 @@ on:
 jobs:
   # This workflow contains a single job called "build"
   build:
-    # The type of runner that the job will run on
-    runs-on: ubuntu-latest
+  runs-on: ubuntu-latest
 
-    # Steps represent a sequence of tasks that will be executed as part of the job
-    steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v4
+  steps:
+    - uses: actions/checkout@v4
 
-      # Runs a single command using the runners shell
-      - name: Run a one-line script
-        run: echo Hello, GitHub Actions !
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
 
-      # Runs a set of commands using the runners shell
-      - name: Run a multi-line script
-        run: |
-          echo Add other actions to build,
-          echo test, and deploy your project.
+    - name: Install dependencies
+      run: npm install
 
-      - name: Set environment variable
-        run: echo 'MY_VARIABLE=This is a variable' >> $GITHUB_ENV
+    - name: Run tests with coverage
+      run: npm run test:coverage
 
-
-      - name: Display variable
-        run: echo "Valeur de MY_VARIABLE:${{ env.MY_VARIABLE }}"
-
-      - name: Display secret
-        run: echo "Valeur de MY_SECRET:***"
-        env:
-          MY_SECRET: ${{ secrets.MY_SECRET }}
-
-      - name: Create hello.txt
-        run: echo "Hello world" > hello.txt
-
-      - name: Display hello.txt content
-        run: cat hello.txt
-
-      - name: Install dependencies
-        run: npm install
-
-      - name: Run tests
-        run: npm test
+    - name: Send coverage to Coveralls
+      run: npm run coveralls
+      env:
+        COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
 
   second-job:
       name: Log message after tests
