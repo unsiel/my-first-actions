@@ -65,7 +65,18 @@ jobs:
       - name: Upload GitHub Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: .   # Change ce chemin si ton index.html est ailleurs
+          path: .
+
+      - name: Upload coverage to Coveralls
+        run: npm run coveralls
+        env:
+          COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
+
+      - name: Eslint DL
+        run : npm install --save-dev eslint
+          
+      - name: Action ESLint
+        uses: sibiraj-s/action-eslint@v3.0.1
 
   second-job:
     runs-on: ubuntu-latest
